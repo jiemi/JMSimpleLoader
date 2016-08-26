@@ -13,6 +13,7 @@
 		3F189C3A1D6EB06D00DB214A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F189C381D6EB06D00DB214A /* Main.storyboard */; };
 		3F189C3C1D6EB06D00DB214A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F189C3B1D6EB06D00DB214A /* Assets.xcassets */; };
 		3F189C3F1D6EB06D00DB214A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F189C3D1D6EB06D00DB214A /* LaunchScreen.storyboard */; };
+		3F189C491D6EB11600DB214A /* JMSimpleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F189C481D6EB11600DB214A /* JMSimpleLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		3F189C3B1D6EB06D00DB214A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F189C3E1D6EB06D00DB214A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F189C401D6EB06D00DB214A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F189C471D6EB11600DB214A /* JMSimpleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMSimpleLoader.h; sourceTree = "<group>"; };
+		3F189C481D6EB11600DB214A /* JMSimpleLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMSimpleLoader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 		3F189C2E1D6EB06D00DB214A /* JMLoadButton */ = {
 			isa = PBXGroup;
 			children = (
+				3F189C461D6EB0CD00DB214A /* Class */,
 				3F189C321D6EB06D00DB214A /* AppDelegate.h */,
 				3F189C331D6EB06D00DB214A /* AppDelegate.m */,
 				3F189C351D6EB06D00DB214A /* ViewController.h */,
@@ -77,6 +81,15 @@
 				3F189C301D6EB06D00DB214A /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3F189C461D6EB0CD00DB214A /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				3F189C471D6EB11600DB214A /* JMSimpleLoader.h */,
+				3F189C481D6EB11600DB214A /* JMSimpleLoader.m */,
+			);
+			name = Class;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F189C371D6EB06D00DB214A /* ViewController.m in Sources */,
+				3F189C491D6EB11600DB214A /* JMSimpleLoader.m in Sources */,
 				3F189C341D6EB06D00DB214A /* AppDelegate.m in Sources */,
 				3F189C311D6EB06D00DB214A /* main.m in Sources */,
 			);
@@ -264,6 +278,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = JMLoadButton/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tesy.JMLoadButton;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -275,6 +290,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = JMLoadButton/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tesy.JMLoadButton;
 				PRODUCT_NAME = "$(TARGET_NAME)";
