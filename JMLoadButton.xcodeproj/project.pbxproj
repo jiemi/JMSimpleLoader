@@ -14,6 +14,7 @@
 		3F189C3C1D6EB06D00DB214A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F189C3B1D6EB06D00DB214A /* Assets.xcassets */; };
 		3F189C3F1D6EB06D00DB214A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F189C3D1D6EB06D00DB214A /* LaunchScreen.storyboard */; };
 		3F189C491D6EB11600DB214A /* JMSimpleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F189C481D6EB11600DB214A /* JMSimpleLoader.m */; };
+		3F189C541D6FF6BB00DB214A /* JMDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F189C531D6FF6BB00DB214A /* JMDotView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		3F189C401D6EB06D00DB214A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F189C471D6EB11600DB214A /* JMSimpleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMSimpleLoader.h; sourceTree = "<group>"; };
 		3F189C481D6EB11600DB214A /* JMSimpleLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMSimpleLoader.m; sourceTree = "<group>"; };
+		3F189C521D6FF6BB00DB214A /* JMDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMDotView.h; sourceTree = "<group>"; };
+		3F189C531D6FF6BB00DB214A /* JMDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMDotView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,8 @@
 			children = (
 				3F189C471D6EB11600DB214A /* JMSimpleLoader.h */,
 				3F189C481D6EB11600DB214A /* JMSimpleLoader.m */,
+				3F189C521D6FF6BB00DB214A /* JMDotView.h */,
+				3F189C531D6FF6BB00DB214A /* JMDotView.m */,
 			);
 			name = Class;
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 			files = (
 				3F189C371D6EB06D00DB214A /* ViewController.m in Sources */,
 				3F189C491D6EB11600DB214A /* JMSimpleLoader.m in Sources */,
+				3F189C541D6FF6BB00DB214A /* JMDotView.m in Sources */,
 				3F189C341D6EB06D00DB214A /* AppDelegate.m in Sources */,
 				3F189C311D6EB06D00DB214A /* main.m in Sources */,
 			);
