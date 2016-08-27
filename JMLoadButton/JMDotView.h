@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JMDotView : UIView
-
+@interface JMDotView : CALayer
+@property(nonatomic,assign)CGFloat factor;
 @end

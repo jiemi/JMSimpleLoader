@@ -36,6 +36,7 @@
 
 
 #import "JMSimpleLoader.h"
+#import "JMCenterRotateView.h"
 @interface JMSimpleLoader() {
     double first_Circle_Stage1_StrokeEnd;
     double first_Circle_Stage2_StrokeEnd;
@@ -63,6 +64,7 @@
     double third_Circle_Stage3_StrokeStart;
     double third_Circle_Stage4_StrokeStart;
 }
+@property(nonatomic,strong) JMCenterRotateView *rotateView;
 
 @end
 @implementation JMSimpleLoader
@@ -73,10 +75,24 @@
         [self setUpStageValues];
         [self creatFirstThreePathLayer];
         [self creatSecondThreePathLayer];
+        [self setUpRotateView];
     }
     
     return self;
 }
+
+- (void)setUpRotateView {
+    
+    CGFloat rotateViewWidth = JMCircleRadius / 2;
+    CGFloat rotateViewHeight = rotateViewWidth;
+    CGFloat rotateX = (self.frame.size.width - rotateViewWidth)/2;
+    CGFloat rotateY = (self.frame.size.height - rotateViewHeight)/2;
+    
+    self.rotateView = [[JMCenterRotateView alloc] initWithFrame:CGRectMake(rotateX, rotateY, rotateViewWidth, rotateViewHeight)];
+    [self addSubview:self.rotateView];
+}
+
+
 
 - (void)setUpStageValues {
     
