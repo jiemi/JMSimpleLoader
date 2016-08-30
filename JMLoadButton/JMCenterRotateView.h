@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "JMDotView.h"
+typedef void(^firstBallDidRestoreCallBack)(void);
+
 @interface JMCenterRotateView : UIView
 
 @property(nonatomic,strong)JMDotView *firstDot;
@@ -16,4 +18,8 @@
 
 @property(nonatomic,strong)JMDotView *thirdDot;
 
+@property(nonatomic,copy)firstBallDidRestoreCallBack dotAniationFinishHandler;
+
+
+- (void)rotateAnimation;
 @end

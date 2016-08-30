@@ -28,6 +28,7 @@
     
     JMSimpleLoader *view1 = [[JMSimpleLoader alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     view1.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
+   // view1.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:view1];
      self.view.backgroundColor = [UIColor colorWithRed:81 green:88 blue:128 alpha:1];
 

@@ -44,7 +44,7 @@
     CGSize dotSize = CGSizeMake(self.frame.size.width/percent, self.frame.size.height/percent);
     //为什么dotOutRectSize为0
    // CGRect dotRect = CGRectMake((dotOutRectSize.width-dotSize.width)/2, (dotOutRectSize.height-dotSize.height)/2, dotSize.width, dotSize.height);
-    //NSLog(@"%f",_factor);
+    NSLog(@"%f",_factor);
    // NSLog(@"%f",);
     
     CGFloat offset =  dotSize.width / 3.6;

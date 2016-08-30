@@ -7,32 +7,7 @@
 //
 
     //#define JMCircleRadius 50
-#define JMCircleStrokWidth 10
-#define Radians(x)  (M_PI * (x) / 180.0)
 
-#define InsetRadians_between_line M_PI / 6
-
-#define JMAnimationTime 1
-
-#define JMCircleRadius 150
-
-#define JMFirstCircleLength  (4 * M_PI + (M_PI/2 - M_PI/6))
-#define JMSecondCircleLength  (4 * M_PI +(M_PI/2 - M_PI/6))
-#define JMThirdCircleLength  (M_PI*5/4 + M_PI/3)
-
-#define JMFirstCircelStartAngle  (-M_PI/2)
-#define JMFirstCircelEndAngle  (4*M_PI - M_PI/6)
-
-#define JMSecondCircelStartAngle  (-M_PI/2)
-#define JMSecondCircelEndAngle  (4*M_PI - M_PI/6)
-
-#define JMThirdCircelStartAngle  (-M_PI/3)
-#define JMthirdCircelEndAngle  (M_PI+M_PI/6)
-
-#define JMRGBA(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:a]
-
-
-#define  JMStrokeWidth 15
 
 
 #import "JMSimpleLoader.h"
@@ -65,6 +40,9 @@
     double third_Circle_Stage4_StrokeStart;
 }
 @property(nonatomic,strong) JMCenterRotateView *rotateView;
+@property(nonatomic,strong) CAAnimationGroup *firstCircleAnimationGroup;
+@property(nonatomic,strong) CAAnimationGroup *secondCircleAnimationGroup;
+
 
 @end
 @implementation JMSimpleLoader
@@ -73,22 +51,32 @@
     
     if (self = [super initWithFrame:frame]) {
         [self setUpStageValues];
-        [self creatFirstThreePathLayer];
-        [self creatSecondThreePathLayer];
+       
         [self setUpRotateView];
+        [self startLoading];
     }
     
     return self;
 }
 
+
+- (void)startLoading {
+    [self creatFirstThreePathLayer];
+    [self creatSecondThreePathLayer];
+}
+
 - (void)setUpRotateView {
     
-    CGFloat rotateViewWidth = JMCircleRadius / 2;
+    CGFloat rotateViewWidth = JMCircleRadius ;
     CGFloat rotateViewHeight = rotateViewWidth;
     CGFloat rotateX = (self.frame.size.width - rotateViewWidth)/2;
     CGFloat rotateY = (self.frame.size.height - rotateViewHeight)/2;
     
     self.rotateView = [[JMCenterRotateView alloc] initWithFrame:CGRectMake(rotateX, rotateY, rotateViewWidth, rotateViewHeight)];
+    __weak typeof(self) weakSelf = self ;
+    self.rotateView.dotAniationFinishHandler = ^{
+        [weakSelf startLoading];
+    };
     [self addSubview:self.rotateView];
 }
 
@@ -130,6 +118,27 @@
     
 }
 
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    NSString *animationName = [anim valueForKey:@"animationName"];
+    if ([animationName isEqualToString:@"firstCircleGroup"]) {
+        
+    } else if ([animationName isEqualToString:@""]) {
+        
+    }
+}
+/**
+ *  毫秒
+ *
+ *  @param mscDelay 毫秒
+ */
+- (void)startRotateAfterSeconds:(int) mscDelay {
+    __weak typeof(self) weakSelf = self ;
+    dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_MSEC *mscDelay);
+    dispatch_after(delay, dispatch_get_main_queue(), ^{
+        [weakSelf.rotateView rotateAnimation];
+    });
+}
+
 - (void)creatFirstThreePathLayer {
     CAShapeLayer *firstCirlce = [CAShapeLayer layer];
     [self.layer addSublayer:firstCirlce];
@@ -160,20 +169,20 @@
     CAKeyframeAnimation *firstCircle_StrokeEnd_Animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
     firstCircle_StrokeEnd_Animation.values = firstCirlce_StrokeEnd_Values;
     firstCircle_StrokeEnd_Animation.keyTimes = firstCirlceTimes;
-    firstCircle_StrokeEnd_Animation.duration = JMAnimationTime;
+    firstCircle_StrokeEnd_Animation.duration = JMLineAnimationTime;
     
     
     CAKeyframeAnimation *firstCircle_StrokeStart_Animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeStart"];
     firstCircle_StrokeStart_Animation.values = firstCirlce_StrokeStart_Values;
     firstCircle_StrokeStart_Animation.keyTimes = firstCirlceTimes;
-    firstCircle_StrokeStart_Animation.duration = JMAnimationTime;
+    firstCircle_StrokeStart_Animation.duration = JMLineAnimationTime;
     
     CAAnimationGroup *firstCircleGroup = [CAAnimationGroup animation];
     firstCircleGroup.animations = @[firstCircle_StrokeStart_Animation,firstCircle_StrokeEnd_Animation];
-    firstCircleGroup.duration = JMAnimationTime;
+    firstCircleGroup.duration = JMLineAnimationTime;
     firstCircleGroup.delegate = self ;
-    firstCircleGroup.removedOnCompletion = true;
-    firstCircleGroup.repeatCount = MAXFLOAT;
+  //  firstCircleGroup.removedOnCompletion = true;
+   // firstCircleGroup.repeatCount = MAXFLOAT;
     [firstCircleGroup setValue:@"firstCircleGroup" forKey:@"animationName"];
     [firstCirlce addAnimation:firstCircleGroup forKey:nil];
     
@@ -199,23 +208,25 @@
     CAKeyframeAnimation *secondCircle_StrokeEnd_Animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
     secondCircle_StrokeEnd_Animation.values = secondCirlce_StrokeEnd_Values;
     secondCircle_StrokeEnd_Animation.keyTimes = secondCirlceTimes;
-    secondCircle_StrokeEnd_Animation.duration = JMAnimationTime;
+    secondCircle_StrokeEnd_Animation.duration = JMLineAnimationTime;
     
     
     CAKeyframeAnimation *secondCircle_StrokeStart_Animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeStart"];
     secondCircle_StrokeStart_Animation.values = secondCirlce_StrokeStart_Values;
     secondCircle_StrokeStart_Animation.keyTimes = secondCirlceTimes;
-    secondCircle_StrokeStart_Animation.duration = JMAnimationTime;
+    secondCircle_StrokeStart_Animation.duration = JMLineAnimationTime;
     
     
     CAAnimationGroup *secondCircleGroup = [CAAnimationGroup animation];
     secondCircleGroup.animations = @[secondCircle_StrokeEnd_Animation,secondCircle_StrokeStart_Animation];
-    secondCircleGroup.duration = JMAnimationTime;
+    secondCircleGroup.duration = JMLineAnimationTime;
     secondCircleGroup.delegate = self ;
-    secondCircleGroup.removedOnCompletion = true;
-    secondCircleGroup.repeatCount = MAXFLOAT;
-    [secondCircleGroup setValue:@"firstCircleGroup" forKey:@"animationName"];
+   // secondCircleGroup.removedOnCompletion = true;
+   // secondCircleGroup.repeatCount = MAXFLOAT;
+  //  [secondCircleGroup setValue:@"firstCircleGroup" forKey:@"animationName"];
     [secondCirlce addAnimation:secondCircleGroup forKey:nil];
+    
+    [self startRotateAfterSeconds:JMLineAnimationTime * 0.2*1000];
     
 }
 
@@ -251,21 +262,21 @@
     CAKeyframeAnimation *firstCircle_StrokeEnd_Animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
     firstCircle_StrokeEnd_Animation.values = firstCirlce_StrokeEnd_Values;
     firstCircle_StrokeEnd_Animation.keyTimes = firstCirlceTimes;
-    firstCircle_StrokeEnd_Animation.duration = JMAnimationTime;
+    firstCircle_StrokeEnd_Animation.duration = JMLineAnimationTime;
     
     
     CAKeyframeAnimation *firstCircle_StrokeStart_Animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeStart"];
     firstCircle_StrokeStart_Animation.values = firstCirlce_StrokeStart_Values;
     firstCircle_StrokeStart_Animation.keyTimes = firstCirlceTimes;
-    firstCircle_StrokeStart_Animation.duration = JMAnimationTime;
+    firstCircle_StrokeStart_Animation.duration = JMLineAnimationTime;
     
     CAAnimationGroup *firstCircleGroup = [CAAnimationGroup animation];
     firstCircleGroup.animations = @[firstCircle_StrokeStart_Animation,firstCircle_StrokeEnd_Animation];
-    firstCircleGroup.duration = JMAnimationTime;
+    firstCircleGroup.duration = JMLineAnimationTime;
     firstCircleGroup.delegate = self ;
-    firstCircleGroup.removedOnCompletion = true;
-    [firstCircleGroup setValue:@"firstCircleGroup" forKey:@"animationName"];
-    firstCircleGroup.repeatCount = MAXFLOAT;
+   // firstCircleGroup.removedOnCompletion = true;
+    [firstCircleGroup setValue:@"secondCircleGroup" forKey:@"animationName"];
+  //  firstCircleGroup.repeatCount = MAXFLOAT;
     [firstCirlce addAnimation:firstCircleGroup forKey:nil];
     
     
@@ -290,22 +301,22 @@
     CAKeyframeAnimation *secondCircle_StrokeEnd_Animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
     secondCircle_StrokeEnd_Animation.values = secondCirlce_StrokeEnd_Values;
     secondCircle_StrokeEnd_Animation.keyTimes = secondCirlceTimes;
-    secondCircle_StrokeEnd_Animation.duration = JMAnimationTime;
+    secondCircle_StrokeEnd_Animation.duration = JMLineAnimationTime;
     
     
     CAKeyframeAnimation *secondCircle_StrokeStart_Animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeStart"];
     secondCircle_StrokeStart_Animation.values = secondCirlce_StrokeStart_Values;
     secondCircle_StrokeStart_Animation.keyTimes = secondCirlceTimes;
-    secondCircle_StrokeStart_Animation.duration = JMAnimationTime;
+    secondCircle_StrokeStart_Animation.duration = JMLineAnimationTime;
     
     
     CAAnimationGroup *secondCircleGroup = [CAAnimationGroup animation];
     secondCircleGroup.animations = @[secondCircle_StrokeEnd_Animation,secondCircle_StrokeStart_Animation];
-    secondCircleGroup.duration = JMAnimationTime;
+    secondCircleGroup.duration = JMLineAnimationTime;
     secondCircleGroup.delegate = self ;
-    secondCircleGroup.removedOnCompletion = true;
-    secondCircleGroup.repeatCount = MAXFLOAT;
-    [secondCircleGroup setValue:@"firstCircleGroup" forKey:@"animationName"];
+   // secondCircleGroup.removedOnCompletion = true;
+    //secondCircleGroup.repeatCount = MAXFLOAT;
+    //[secondCircleGroup setValue:@"firstCircleGroup" forKey:@"animationName"];
     [secondCirlce addAnimation:secondCircleGroup forKey:nil];
     
     
@@ -329,22 +340,22 @@
     CAKeyframeAnimation *thirdCircle_StrokeEnd_Animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
     thirdCircle_StrokeEnd_Animation.values = thirdCirlce_StrokeEnd_Values;
     thirdCircle_StrokeEnd_Animation.keyTimes = thirdCirlceTimes;
-    thirdCircle_StrokeEnd_Animation.duration = JMAnimationTime;
+    thirdCircle_StrokeEnd_Animation.duration = JMLineAnimationTime;
     
     
     CAKeyframeAnimation *thirdCircle_StrokeStart_Animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeStart"];
     thirdCircle_StrokeStart_Animation.values = thirdCirlce_StrokeStart_Values;
     thirdCircle_StrokeStart_Animation.keyTimes = thirdCirlceTimes;
-    thirdCircle_StrokeStart_Animation.duration = JMAnimationTime;
+    thirdCircle_StrokeStart_Animation.duration = JMLineAnimationTime;
     
     
     CAAnimationGroup *thirdCircleGroup = [CAAnimationGroup animation];
     thirdCircleGroup.animations = @[thirdCircle_StrokeEnd_Animation,thirdCircle_StrokeStart_Animation];
-    thirdCircleGroup.duration = JMAnimationTime;
+    thirdCircleGroup.duration = JMLineAnimationTime;
     thirdCircleGroup.delegate = self ;
-    thirdCircleGroup.removedOnCompletion = true;
-    thirdCircleGroup.repeatCount = MAXFLOAT;
-    [thirdCircleGroup setValue:@"thirdCircleGroup" forKey:@"animationName"];
+   // thirdCircleGroup.removedOnCompletion = true;
+ //   thirdCircleGroup.repeatCount = MAXFLOAT;
+  //  [thirdCircleGroup setValue:@"thirdCircleGroup" forKey:@"animationName"];
     [thirdCirlce addAnimation:thirdCircleGroup forKey:nil];
 
 }
@@ -355,8 +366,7 @@
              endAngle:(double)endAngle {
     
     UIBezierPath *path ;
-    path = [UIBezierPath bezierPathWithArcCenter:self.center radius:radius startAngle:startAngle endAngle:endAngle  clockwise:YES];
-
+    path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2, self.frame.size.height/2) radius:radius startAngle:startAngle endAngle:endAngle  clockwise:YES];
     return path;
   
 }
