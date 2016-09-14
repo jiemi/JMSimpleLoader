@@ -26,9 +26,6 @@
     self.secondDot = [JMDotView layer];
     self.thirdDot = [JMDotView layer];
     
- //  self.firstDot.backgroundColor = [UIColor greenColor].CGColor;
-   //self.secondDot.backgroundColor = [UIColor blueColor].CGColor;
-  // self.thirdDot.backgroundColor = [UIColor magentaColor].CGColor;
 
     
    [self.layer addSublayer:_firstDot];
@@ -59,6 +56,11 @@
     [rotateAnimation setValue:@"rotateAnimation" forKey:@"animationName"];
     [self.layer addAnimation:rotateAnimation forKey:nil];
     
+}
+
+- (void)removeAnimations {
+    [self.layer removeAllAnimations];
+    [[self firstDot] removeAllAnimations];
 }
 
 - (void)firstDotMoveAnimation {

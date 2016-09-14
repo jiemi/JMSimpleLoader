@@ -65,6 +65,15 @@
     [self creatSecondThreePathLayer];
 }
 
+- (void)stopLoading {
+    [self.rotateView removeAnimations];
+    NSArray *sublayers = [self.layer sublayers];
+    for(CALayer *layer in sublayers) {
+        [layer removeAllAnimations];
+        [layer removeFromSuperlayer];
+    }
+}
+
 - (void)setUpRotateView {
     
     CGFloat rotateViewWidth = JMCircleRadius ;
@@ -96,7 +105,7 @@
     first_Circle_Stage1_StrokeStart = (M_PI/2-M_PI/6)/s1;
     first_Circle_Stage2_StrokeStart = (2*M_PI + M_PI/6)/s1; //同时也是白线起点
     first_Circle_Stage3_StrokeStart = (4*M_PI-M_PI/6)/s1;
-    first_Circle_Stage4_StrokeStart = 1;
+    first_Circle_Stage4_StrokeStart = (s1-M_PI/30)/s1;//1;
     
     second_Circle_Stage1_StrokeEnd = (M_PI+M_PI/8-M_PI/12)/s2;
     second_Circle_Stage2_StrokeEnd = (4*M_PI-M_PI*1/3-M_PI/3)/s2;
@@ -106,13 +115,13 @@
     second_Circle_Stage1_StrokeStart = (M_PI/2-M_PI/6)/s2;
     second_Circle_Stage2_StrokeStart = (2*M_PI + M_PI/6)/s2;; //同时也是白线起点
     second_Circle_Stage3_StrokeStart = (4*M_PI-M_PI/6-M_PI/3)/s2;
-    second_Circle_Stage4_StrokeStart = (4 * M_PI )/s2;
+    second_Circle_Stage4_StrokeStart = (4 * M_PI-M_PI/30)/s2;//(4 * M_PI )/s2;
     
     third_Circle_Stage3_StrokeEnd = (M_PI*5/4)/s3;
     third_Circle_Stage4_StrokeEnd = 1;
     
     third_Circle_Stage3_StrokeStart = (M_PI*5/4-M_PI/3)/s3;
-    third_Circle_Stage4_StrokeStart = 1;
+    third_Circle_Stage4_StrokeStart = (s3 - M_PI/30)/s3;//1;
     
     
     
@@ -402,7 +411,7 @@
     double firstCirlce_Stage0_Stroke_Time = 0.0/10;
     double firstCirlce_Stage1_Stroke_Time = 2.0/10;
     double firstCirlce_Stage2_Stroke_Time = (6.0)/10;
-    double firstCirlce_Stage3_Stroke_Time = (8.5)/10;
+    double firstCirlce_Stage3_Stroke_Time = (8.1)/10;
     double firstCirlce_Stage4_Stroke_Time = (10.0)/10;
     
     NSArray<NSNumber*>* firstCirlceTimes = @[@(firstCirlce_Stage0_Stroke_Time),@(firstCirlce_Stage1_Stroke_Time),@(firstCirlce_Stage2_Stroke_Time),@(firstCirlce_Stage3_Stroke_Time),@(firstCirlce_Stage4_Stroke_Time)];
@@ -429,7 +438,7 @@
     double firstCirlce_Stage1_Stroke_Time = 1.0/10;
     double firstCirlce_Stage2_Stroke_Time = (3.0)/10;
     double firstCirlce_Stage3_Stroke_Time = (6.0)/10;
-    double firstCirlce_Stage4_Stroke_Time = (8.5)/10;
+    double firstCirlce_Stage4_Stroke_Time = (8.1)/10;
     double firstCirlce_Stage5_Stroke_Time = (10.0)/10;
     
     NSArray<NSNumber*>* firstCirlceTimes = @[@(firstCirlce_Stage0_Stroke_Time),@(firstCirlce_Stage1_Stroke_Time),@(firstCirlce_Stage2_Stroke_Time),@(firstCirlce_Stage3_Stroke_Time),@(firstCirlce_Stage4_Stroke_Time),@(firstCirlce_Stage5_Stroke_Time)];

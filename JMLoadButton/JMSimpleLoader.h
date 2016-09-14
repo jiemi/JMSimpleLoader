@@ -12,26 +12,26 @@
 
 #define InsetRadians_between_line M_PI / 6
 
-#define JMLineAnimationTime 0.7
+#define JMLineAnimationTime 0.8
 #define JMRotateAnimationTime (JMLineAnimationTime * 4 / 10)
 #define JMFirstDotMoveAnimationTime (JMLineAnimationTime *  5 / 10)
 #define JMFirstDotRestoreAnimationTime (JMLineAnimationTime *  6 / 10)
 
 
-#define JMCircleRadius 150
+#define JMCircleRadius 100
 
-#define JMFirstCircleLength  (4 * M_PI + (M_PI/2 - M_PI/999))
-#define JMSecondCircleLength  (4 * M_PI +(M_PI/2 - M_PI/999))
+#define JMFirstCircleLength  (4 * M_PI + (M_PI/2 - M_PI/12))
+#define JMSecondCircleLength  (4 * M_PI +(M_PI/2 - M_PI/12))
 #define JMThirdCircleLength  (M_PI*5/4 + M_PI/3)
 
 #define JMFirstCircelStartAngle  (-M_PI/2)
-#define JMFirstCircelEndAngle  (4*M_PI - M_PI/999)
+#define JMFirstCircelEndAngle  (4*M_PI - M_PI/12)
 
 #define JMSecondCircelStartAngle  (-M_PI/2)
-#define JMSecondCircelEndAngle  (4*M_PI - M_PI/999)
+#define JMSecondCircelEndAngle  (4*M_PI - M_PI/12)
 
 #define JMThirdCircelStartAngle  (-M_PI/3)
-#define JMthirdCircelEndAngle  (M_PI+M_PI/6)
+#define JMthirdCircelEndAngle  (M_PI+M_PI/5)
 
 #define JMRGBA(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:a]
 

@@ -22,4 +22,5 @@ typedef void(^firstBallDidRestoreCallBack)(void);
 
 
 - (void)rotateAnimation;
+- (void)removeAnimations;
 @end
